@@ -8,13 +8,13 @@ provider "aws" {
 
 # Create the beanstalk app
 module "app" {
-  source = "git@github.com:Wolox/terraform-base-infra.git?ref=add-eb-rds//aws/elasticbeanstalk/application"
+  source = "git@github.com:Wolox/terraform-base-infra.git//aws/elasticbeanstalk/application"
   application = "test-app"
 }
 
 # Create the environment
 module "env" {
-  source = "git@github.com:Wolox/terraform-base-infra.git?ref=add-eb-rds//aws/eb_rds"
+  source = "git@github.com:Wolox/terraform-base-infra.git//aws/eb_rds"
 
   aws_region = "eu-west-1"
   aws_azs    = ["eu-west-1a", "eu-west-1b"]
