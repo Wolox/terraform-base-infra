@@ -21,6 +21,10 @@ variable "db_port" {
   default = "5432"
 }
 
+variable "ssh_cidr" {
+  default = "0.0.0.0/0"
+}
+
 resource "aws_vpc" "main" {
   cidr_block           = "${var.cidr_block}"
   enable_dns_hostnames = "true"
@@ -44,7 +48,7 @@ resource "aws_default_security_group" "sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${var.ssh_cidr}"]
   }
 
   ingress {
@@ -150,10 +154,18 @@ output "public_subnets" {
   value = "${aws_subnet.public.*.id}"
 }
 
+output "servers_sg_id" {
+  value = "${aws_security_group.servers.id}"
+}
+
 output "private_dbs_subnets_cidr" {
   value = ["${aws_subnet.private_dbs.*.cidr_block}"]
 }
 
 output "private_dbs_subnets" {
   value = "${aws_subnet.private_dbs.*.id}"
+}
+
+output "dbs_sg_id" {
+  value = "${aws_security_group.dbs.id}"
 }

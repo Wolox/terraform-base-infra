@@ -11,6 +11,10 @@ variable "dbs_private_subnets" {
   default = ["10.0.3.0/24", "10.0.4.0/24"]
 }
 
+variable "ssh_cidr" {
+  default = "0.0.0.0/0"
+}
+
 # AWS Variables
 variable "aws_region" {
   default = "us-east-1"
