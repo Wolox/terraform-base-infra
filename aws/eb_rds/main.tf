@@ -12,6 +12,10 @@ module "vpc" {
 output "vpc_id" {
   value="${module.vpc.vpc_id}"
 }
+  
+output "servers_sg_id" {
+  value="${module.vpc.servers_sg_id}"
+}
 
 # Create the beanstalk environment
 module "server" {
