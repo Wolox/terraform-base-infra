@@ -2,6 +2,8 @@ resource "aws_s3_bucket" "bucket" {
   bucket = "${var.bucket_name}"
   acl    = "public-read"
 
+  force_destroy = true
+
   policy = <<EOF
 {
     "Version": "2008-10-17",

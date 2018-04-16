@@ -54,8 +54,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   viewer_certificate {
     cloudfront_default_certificate = "${!local.custom_certificate}"
 
-    acm_certificate_arn      = "${local.custom_certificate ? element(concat(data.aws_acm_certificate.c.*.arn, list("")), 1) : ""}"
+    acm_certificate_arn      = "${local.custom_certificate ? element(concat(data.aws_acm_certificate.c.*.arn, list("")), 0) : ""}"
     minimum_protocol_version = "${local.custom_certificate ? "TLSv1.1_2016" : "TLSv1"}"
+    ssl_support_method       = "sni-only"
   }
 
   restrictions {
