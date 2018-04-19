@@ -59,7 +59,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:ec2:vpc"
     name      = "AssociatePublicIpAddress"
-    value     = "false"
+    value     = "true"
   }
 
   setting {
@@ -84,6 +84,12 @@ resource "aws_elastic_beanstalk_environment" "env" {
     namespace = "aws:autoscaling:launchconfiguration"
     name      = "IamInstanceProfile"
     value     = "${aws_iam_instance_profile.ec2-role.name}"
+  }
+
+  setting {
+    namespace = "aws:autoscaling:asg"
+    name      = "MaxSize"
+    value     = "1"
   }
 
   setting {
