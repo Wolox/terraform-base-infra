@@ -8,13 +8,13 @@ module "vpc" {
   dbs_private_subnets = "${var.dbs_private_subnets}"
   ssh_cidr            = "${var.ssh_cidr}"
 }
-  
+
 output "vpc_id" {
-  value="${module.vpc.vpc_id}"
+  value = "${module.vpc.vpc_id}"
 }
-  
+
 output "servers_sg_id" {
-  value="${module.vpc.servers_sg_id}"
+  value = "${module.vpc.servers_sg_id}"
 }
 
 # Create the beanstalk environment
