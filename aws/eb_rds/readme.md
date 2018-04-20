@@ -35,8 +35,8 @@ module "env" {
   eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exists in the account
   eb_environment_type    = "SingleInstance" # Optional
   eb_instance_type       = "t2.small"       # Optional
-  eb_solution_stack_name = "64bit Amazon Linux 2017.09 v2.8.4 running Docker 17.09.1-ce" # Optional. [Here](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html) is the full list
-}
+  eb_solution_stack_name = "64bit Amazon Linux 2017.09 v2.8.4 running Docker 17.09.1-ce" # Optional
+g}
 ```
 
 
