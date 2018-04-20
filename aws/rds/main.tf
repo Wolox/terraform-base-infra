@@ -1,33 +1,3 @@
-variable "environment" {}
-variable "application" {}
-variable "db_name" {}
-variable "username" {}
-variable "password" {}
-variable "security_group" {}
-variable "engine" {}
-variable "engine_version" {}
-
-variable "azs" {
-  type = "list"
-}
-
-variable "subnets" {
-  type = "list"
-}
-
-variable "instance_type" {
-  default = "db.t2.micro"
-}
-
-variable "multi_az" {
-  default = false
-}
-
-resource "aws_db_subnet_group" "default" {
-  name       = "${var.application}-${var.environment}"
-  subnet_ids = ["${var.subnets}"]
-}
-
 # Create the database
 # TODO: Remove hardcoded parameters
 resource "aws_db_instance" "default" {
@@ -47,16 +17,4 @@ resource "aws_db_instance" "default" {
   backup_retention_period = 7
   apply_immediately       = true
   multi_az                = "${var.multi_az}"
-}
-
-output "endpoint" {
-  value = "${aws_db_instance.default.address}"
-}
-
-output "name" {
-  value = "${aws_db_instance.default.name}"
-}
-
-output "username" {
-  value = "${aws_db_instance.default.username}"
 }

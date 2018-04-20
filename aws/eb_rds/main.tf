@@ -46,4 +46,5 @@ module "db" {
   multi_az       = "${var.rds_multi_az}"
   engine         = "${var.rds_engine}"
   engine_version = "${var.rds_engine_version}"
+  instance_type  = "${var.rds_instance_type}"
 }
