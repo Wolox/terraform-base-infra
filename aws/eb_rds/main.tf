@@ -9,6 +9,14 @@ module "vpc" {
   ssh_cidr            = "${var.ssh_cidr}"
 }
 
+output "vpc_id" {
+  value = "${module.vpc.vpc_id}"
+}
+
+output "servers_sg_id" {
+  value = "${module.vpc.servers_sg_id}"
+}
+
 # Create the beanstalk environment
 module "server" {
   source              = "../elasticbeanstalk/environment"
@@ -38,4 +46,5 @@ module "db" {
   multi_az       = "${var.rds_multi_az}"
   engine         = "${var.rds_engine}"
   engine_version = "${var.rds_engine_version}"
+  instance_type  = "${var.rds_instance_type}"
 }

@@ -16,6 +16,7 @@ variable "ssh_cidr" {
 }
 
 # AWS Variables
+# TODO: We could get this from the 'current zone'
 variable "aws_region" {
   default = "us-east-1"
 }
@@ -47,6 +48,10 @@ variable "rds_port" {
 
 variable "rds_multi_az" {
   default = false
+}
+
+variable "rds_instance_type" {
+  default = "db.t2.micro"
 }
 
 # EB Variables
