@@ -1,4 +1,3 @@
-# VPC Variables
 output "public_subnets" {
   value = "${var.public_subnets}"
 }
