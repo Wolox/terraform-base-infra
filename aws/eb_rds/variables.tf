@@ -62,7 +62,7 @@ variable "eb_environment" {}
 variable "eb_ec2_key_name" {}
 
 variable "eb_solution_stack_name" {
-  default = "64bit Amazon Linux 2017.09 v2.8.4 running Docker 17.09.1-ce"
+  default = "64bit Amazon Linux 2018.03 v2.10.0 running Docker 17.12.1-ce"
 }
 
 variable "eb_environment_type" {
