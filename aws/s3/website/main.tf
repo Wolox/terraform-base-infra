@@ -25,17 +25,6 @@ EOF
     index_document = "${var.index_document}"
     error_document = "${var.error_document}"
 
-    routing_rules = <<EOF
-[{
-  "Condition": {
-    "HttpErrorCodeReturnedEquals": "404"
-  },
-  "Redirect": {
-    "HostName": "${var.bucket_custom_domain == "" ? local.default_website_url : var.bucket_custom_domain}",
-    "ReplaceKeyPrefixWith": "#!/"
-  }
-}]
-EOF
   }
 
   cors_rule {
