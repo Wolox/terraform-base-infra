@@ -23,6 +23,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
       https_port             = "443"
       origin_ssl_protocols   = ["TLSv1"]
     }
+
+    custom_error_response {
+      error_code            = 404
+      response_page_path    = "/"
+    }
   }
 
   enabled             = "${var.cf_enabled}"
