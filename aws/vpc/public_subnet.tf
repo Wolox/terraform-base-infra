@@ -81,7 +81,7 @@ resource "aws_network_acl_rule" "public_subnet_return_traffic_egress" {
   rule_number    = "120"
   rule_action    = "allow"
   cidr_block     = "0.0.0.0/0"
-  from_port      = 32768
+  from_port      = 1024
   to_port        = 65535
 }
 
