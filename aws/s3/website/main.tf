@@ -24,7 +24,6 @@ EOF
   website {
     index_document = "${var.index_document}"
     error_document = "${var.error_document}"
-
   }
 
   cors_rule {
