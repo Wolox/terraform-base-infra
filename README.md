@@ -22,6 +22,12 @@ provider "aws" {
   region  = "us-east-1"
 }
 
+data "aws_elastic_beanstalk_solution_stack" "docker_latest" {
+  most_recent = true
+
+  name_regex = "^64bit Amazon Linux (.*) running Docker (.*)$"
+}
+
 # Create the beanstalk app
 module "app" {
   source = "git@github.com:Wolox/terraform-base-infra.git//aws/elasticbeanstalk/application"
@@ -50,8 +56,8 @@ module "development" {
   eb_environment         = "development"    # Mandatory
   eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exist in the account
   eb_environment_type    = "SingleInstance" # Optional
-  eb_instance_type       = "t2.small"       # Optional
-  eb_solution_stack_name = "64bit Amazon Linux 2018.03 v2.10.0 running Docker 17.12.1-ce" # Optional
+  eb_instance_type       = "t3.small"       # Optional
+  eb_solution_stack_name = "${data.aws_elastic_beanstalk_solution_stack.docker_latest.name}" # Optional
 }
 ```
 If you ever need to add a new environment, `production` for example, just add a new module:
@@ -66,6 +72,13 @@ provider "aws" {
   profile = "eb-cli"
   region  = "us-east-1"
 }
+
+data "aws_elastic_beanstalk_solution_stack" "docker_latest" {
+  most_recent = true
+
+  name_regex = "^64bit Amazon Linux (.*) running Docker (.*)$"
+}
+
 
 # Create the beanstalk app
 module "app" {
@@ -95,8 +108,8 @@ module "development" {
   eb_environment         = "development"    # Mandatory
   eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exist in the account
   eb_environment_type    = "SingleInstance" # Optional
-  eb_instance_type       = "t2.small"       # Optional
-  eb_solution_stack_name = "64bit Amazon Linux 2018.03 v2.10.0 running Docker 17.12.1-ce" # Optional
+  eb_instance_type       = "t3.small"       # Optional
+  eb_solution_stack_name = "${data.aws_elastic_beanstalk_solution_stack.docker_latest.name}" # Optional
 }
 
 module "production" {
@@ -120,8 +133,8 @@ module "production" {
   eb_environment         = "production"    # Mandatory
   eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exist in the account
   eb_environment_type    = "LoadBalanced" # Optional
-  eb_instance_type       = "t2.small"       # Optional
-  eb_solution_stack_name = "64bit Amazon Linux 2018.03 v2.10.0 running Docker 17.12.1-ce" # Optional
+  eb_instance_type       = "t3.small"       # Optional
+  eb_solution_stack_name = "${data.aws_elastic_beanstalk_solution_stack.docker_latest.name}" # Optional
 }
 ```
 
