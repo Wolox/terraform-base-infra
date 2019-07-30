@@ -22,7 +22,7 @@ module "server" {
   rds_connection_url  = "${var.rds_engine}://${var.rds_username}:${var.rds_password}@${module.db.endpoint}/${module.db.name}"
   solution_stack_name = "${var.eb_solution_stack_name}"
   environment_type    = "${var.eb_environment_type}"
-  load_balancer_type  = "${var.eb_load+balancer_type}"
+  load_balancer_type  = "${var.eb_load_balancer_type}"
   instance_type       = "${var.eb_instance_type}"
 }
 
