@@ -21,6 +21,10 @@ variable "instance_type" {
   default = "t2.small"
 }
 
+# variable "load_balancer_type" {
+#   default = "classic"
+# }
+
 resource "aws_elastic_beanstalk_environment" "env" {
   name                = "${var.environment}"
   application         = "${var.application}"

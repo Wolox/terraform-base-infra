@@ -133,7 +133,6 @@ module "production" {
   eb_environment         = "production"    # Mandatory
   eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exist in the account
   eb_environment_type    = "LoadBalanced" # Optional
-  eb_load_balancer_type  = "application"  # Optional. Should be used only with LoadBalanced environments
   eb_instance_type       = "t3.small"       # Optional
   eb_solution_stack_name = "${data.aws_elastic_beanstalk_solution_stack.docker_latest.name}" # Optional
 }
