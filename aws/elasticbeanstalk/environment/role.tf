@@ -39,6 +39,30 @@ resource "aws_iam_role_policy_attachment" "worker" {
   policy_arn = "arn:aws:iam::aws:policy/AWSElasticBeanstalkWorkerTier"
 }
 
+resource "aws_iam_role_policy_attachment" "describe_environment" {
+  role       = "${aws_iam_role.ec2-role.name}"
+  policy_arn = "${aws_iam_policy.describe_environment.arn}"
+}
+
+resource "aws_iam_policy" "describe_environment" {
+  name        = "DescribeEnvironment"
+  description = "Allows EC2 instance to describe the Elastic Beanstalk environment"
+
+  policy = <<EOF
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "",
+            "Effect": "Allow",
+            "Action": "elasticbeanstalk:DescribeEnvironments",
+            "Resource": "${aws_elastic_beanstalk_environment.env.arn}"
+        }
+    ]
+}
+EOF
+}
+
 # EB Service
 resource "aws_iam_role" "eb-service-role" {
   name = "${var.application}-${var.environment}-eb-service-role"
