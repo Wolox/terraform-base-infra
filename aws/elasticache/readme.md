@@ -43,10 +43,12 @@ module "cache" {
   source                    = "git@github.com:Wolox/terraform-base-infra.git//aws/elasticache"
   application               = "test-app"
   environment               = "development"
+  azs                       = ["us-east-1a", "us-east-1b"]
   app_security_group        = "${module.env.servers_sg_id}"
   vpc_id                    = "${module.env.vpc_id}"
-  azs                       = ["us-east-1a", "us-east-1b"] # Mandatory
   server_public_subnet_cidr = "${module.env.public_subnets}"
+  port                      = "6379" # Optional
+  version                   = "4.0.10"
 }
 
 ```

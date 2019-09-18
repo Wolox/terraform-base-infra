@@ -23,3 +23,11 @@ variable "app_security_group" { }
 variable "node_type" {
   default = "cache.t2.micro"
 }
+
+variable "port" {
+  default = 6379
+}
+
+variable "version" {
+  default = "4.0.10"
+}

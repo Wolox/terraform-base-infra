@@ -28,8 +28,8 @@ resource "aws_network_acl_rule" "private_cache_public_acl_ingress" {
   rule_number    = "12${count.index}"
   rule_action    = "allow"
   cidr_block     = "${var.server_public_subnet_cidr[count.index]}"
-  from_port      = 6379
-  to_port        = 6379
+  from_port      = "${var.port}"
+  to_port        = "${var.port}"
 }
 
 resource "aws_network_acl_rule" "private_cache_public_return_traffic" {
@@ -50,8 +50,8 @@ resource "aws_security_group" "cache_sg" {
   name = "elasticache-${var.application}-${var.environment}-sg"
 
   ingress {
-    from_port       = 6379
-    to_port         = 6379
+    from_port       = "${var.port}"
+    to_port         = "${var.port}"
     protocol        = "tcp"
     security_groups = ["${var.app_security_group}"]
   }
@@ -76,8 +76,8 @@ resource "aws_elasticache_cluster" "redis" {
   node_type            = "${var.node_type}"
   num_cache_nodes      = 1
   parameter_group_name = "default.redis4.0"
-  engine_version       = "4.0.10"
-  port                 = 6379
+  engine_version       = "${var.version}"
+  port                 = "${var.port}"
   subnet_group_name    = "${aws_elasticache_subnet_group.subnet_group.name}"
   security_group_ids   = ["${aws_security_group.cache_sg.id}"]
 }
