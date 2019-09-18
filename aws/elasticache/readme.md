@@ -22,7 +22,7 @@ module "env" {
   ssh_cidr = "0.0.0.0/0"                    # Mandatory. Please, don't use this default.
 
   rds_db_name         = "development"       # Mandatory
-  rds_username        = "joseperezuser"     # Mandatory
+  rds_username        = "testdb"            # Mandatory
   rds_password        = "unPassword!1234"   # Mandatory
   rds_engine          = "postgres"          # Optional
   rds_engine_version  = "9.6.6"             # Optional
@@ -32,22 +32,21 @@ module "env" {
 
   eb_application         = "test-app"       # Mandatory
   eb_environment         = "development"    # Mandatory
-  eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exist in the account
+  eb_ec2_key_name        = "somecustomkey"  # Mandatory. Must exist in the account
   eb_environment_type    = "SingleInstance" # Optional
-  eb_instance_type       = "t2.small"       # Optional
-  eb_solution_stack_name = "64bit Amazon Linux 2018.03 v2.10.0 running Docker 17.12.1-ce" # Optional
+  eb_instance_type       = "t2.micro"       # Optional
+  eb_solution_stack_name = "64bit Amazon Linux 2018.03 v2.12.17 running Docker 18.06.1-ce" # Optional
 }
 
 # Create the redis cluster
 module "cache" {
-  source             = "git@github.com:Wolox/terraform-base-infra.git//aws/elasticache"
-  application        = "myapp"
-  environment        = "development"
-  app_security_group = "${module.env.servers_sg_id}"
-  subnet_ids         = ["${module.env.dbs_private_subnets.*.id}"]
-  vpc_id             = "${modulue.env.vpc_id}"
+  source                    = "git@github.com:Wolox/terraform-base-infra.git//aws/elasticache"
+  application               = "test-app"
+  environment               = "development"
+  app_security_group        = "${module.env.servers_sg_id}"
+  vpc_id                    = "${module.env.vpc_id}"
+  azs                       = ["us-east-1a", "us-east-1b"] # Mandatory
+  server_public_subnet_cidr = "${module.env.public_subnets}"
 }
+
 ```
-
-
-
