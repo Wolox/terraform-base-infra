@@ -2,7 +2,17 @@ variable "application" { }
 
 variable "environment" { }
 
-variable "subnet_ids" {
+variable "azs" {
+  type = "list"
+}
+
+variable "cache_private_subnets" {
+  type = "list"
+
+  default = ["10.0.5.0/24", "10.0.6.0/24"]
+}
+
+variable "server_public_subnet_cidr" {
   type = "list"
 }
 

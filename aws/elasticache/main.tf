@@ -1,3 +1,50 @@
+# Cache private subnets
+resource "aws_subnet" "private_cache" {
+  count             = "${length(var.azs)}"
+  vpc_id            = "${var.vpc_id}"
+  cidr_block        = "${var.cache_private_subnets[count.index]}"
+  availability_zone = "${var.azs[count.index]}"
+
+  tags {
+    Name = "${var.application}-${var.environment}-private-cache-${count.index}"
+  }
+}
+
+# NACL for cache subnets
+resource "aws_network_acl" "private_cache_acl" {
+  vpc_id     = "${var.vpc_id}"
+  subnet_ids = ["${aws_subnet.private_cache.*.id}"]
+
+  tags {
+    Name = "private-cache-subnet"
+  }
+}
+
+resource "aws_network_acl_rule" "private_cache_public_acl_ingress" {
+  network_acl_id = "${aws_network_acl.private_cache_acl.id}"
+  egress         = false
+  count          = "${length(var.azs)}"
+  protocol       = "tcp"
+  rule_number    = "12${count.index}"
+  rule_action    = "allow"
+  cidr_block     = "${var.server_public_subnet_cidr[count.index]}"
+  from_port      = 6379
+  to_port        = 6379
+}
+
+resource "aws_network_acl_rule" "private_cache_public_return_traffic" {
+  network_acl_id = "${aws_network_acl.private_cache_acl.id}"
+  egress         = true
+  count          = "${length(var.azs)}"
+  protocol       = "tcp"
+  rule_number    = "13${count.index}"
+  rule_action    = "allow"
+  cidr_block     = "${var.server_public_subnet_cidr[count.index]}"
+  from_port      = 1024
+  to_port        = 65535
+}
+
+
 resource "aws_security_group" "cache_sg" {
   vpc_id = "${var.vpc_id}"
   name = "elasticache-${var.application}-${var.environment}-sg"
@@ -19,12 +66,12 @@ resource "aws_security_group" "cache_sg" {
 
 
 resource "aws_elasticache_subnet_group" "subnet_group" {
-  name       = "pj-${substr(var.application, 0, 3)}-${substr(var.environment, 0, 5)}-sng"
-  subnet_ids = ["${var.subnet_ids}"]
+  name       = "${substr(var.application, 0, 3)}-${substr(var.environment, 0, 5)}-sng"
+  subnet_ids = ["${aws_subnet.private_cache.*.id}"]
 }
 
 resource "aws_elasticache_cluster" "redis" {
-  cluster_id           = "pj-${substr(var.application, 0, 3)}-${substr(var.environment, 0, 5)}-cache"
+  cluster_id           = "${substr(var.application, 0, 3)}-${substr(var.environment, 0, 5)}-cache"
   engine               = "redis"
   node_type            = "${var.node_type}"
   num_cache_nodes      = 1
