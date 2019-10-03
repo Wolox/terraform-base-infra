@@ -39,7 +39,7 @@ variable "rds_engine" {
 }
 
 variable "rds_engine_version" {
-  default = "9.6.6"
+  default = "11.4"
 }
 
 variable "rds_port" {
