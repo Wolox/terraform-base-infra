@@ -28,7 +28,7 @@ module "env" {
   rds_username        = "joseperezuser"     # Mandatory
   rds_password        = "unPassword!1234"   # Mandatory
   rds_engine          = "postgres"          # Optional
-  rds_engine_version  = "9.6.6"             # Optional
+  rds_engine_version  = "11.4"             # Optional
   rds_port            = "5432"              # Optional
   rds_multi_az        = false               # Optional
   rds_instance_type   = "db.t2.micro"       # Optional
