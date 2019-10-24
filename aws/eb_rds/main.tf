@@ -8,6 +8,7 @@ module "vpc" {
   dbs_private_subnets = "${var.dbs_private_subnets}"
   ssh_cidr            = "${var.ssh_cidr}"
   db_port             = "${var.rds_port}"
+  cidr_block          = "${var.cidr_block}"
 }
 
 # Create the beanstalk environment
