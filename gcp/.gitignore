@@ -1,0 +1,3 @@
+CREDENTIALS_FILE.json
+.terraform/*
+*.tfstate*
