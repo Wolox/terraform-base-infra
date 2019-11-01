@@ -25,6 +25,9 @@ resource "google_compute_instance" "default" {
     access_config {
     }
   }
+  depends_on = [
+    "google_project_service.project",
+  ]
 }
 
 output "instance_id" {
