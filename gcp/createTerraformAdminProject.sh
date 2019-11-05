@@ -34,6 +34,7 @@ gcloud services enable iam.googleapis.com
 gcloud services enable compute.googleapis.com
 gcloud services enable appengine.googleapis.com
 gcloud services enable serviceusage.googleapis.com
+gcloud services enable run.googleapis.com
 
 gcloud organizations add-iam-policy-binding ${TF_VAR_org_id} \
   --member serviceAccount:terraform@${TF_ADMIN}.iam.gserviceaccount.com \
