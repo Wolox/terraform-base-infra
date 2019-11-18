@@ -2,13 +2,15 @@
 
 This repository contains the building blocks for basic infrastructure.
 
-It inclues:
+It includes:
 
 - AWS:
    - ElasticBeanstaslk + RDS
    - S3 Website
 - GCP:
+   - [Cloud Compute](gcp/README.md)
    - [App Engine + RDS](gcp/README.md)
+   - [Cloud Run](gcp/README.md)
 
 ## AWS
 

@@ -4,6 +4,10 @@
 
 A terraform admin project must be created to handle all project creation and deployments. Setup `createTerraformAdminProject.sh` variables and run it to create it. Remember that you need `gcloud` installed and setup too.
 
+Every environment requires a diferent project to be created. Billing account and organization id is also required to be set to deploy the resources.
+
+![](diagram.png)
+
 ## Usage example
 
 ### Compute engine intance
@@ -45,5 +49,26 @@ module "production" {
   project_editors = ["user:an.editor@wolox.com.ar"]
 
   rds_memory_size_gb = 2
+}
+```
+
+### Basic Cloud Run
+
+Creates a project, enables cloud run & deploys a simple container.
+
+```hcl
+module "development" {
+  source = "./project"
+
+  project_name    = "dev-we-wolox"
+  billing_account = "${var.billing_account}"
+  org_id          = "${var.org_id}"
+  owners          = ["user:federico.casares@wolox.com.ar", "user:matias.desanti@wolox.com.ar"]
+  editors         = ["user:federico.casares@wolox.com.ar", "user:matias.desanti@wolox.com.ar"]
+}
+
+module "dev_cloudrun" {
+  source     = "./cloudrun"
+  project_id = "${module.development.project_id}"
 }
 ```
