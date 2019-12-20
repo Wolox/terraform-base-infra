@@ -70,5 +70,9 @@ variable "eb_environment_type" {
 }
 
 variable "eb_instance_type" {
-  default = "t2.small"
+  default = "t3.small"
+}
+
+variable "eb_stream_logs" {
+  default = "false"
 }

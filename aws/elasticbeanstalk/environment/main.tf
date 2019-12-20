@@ -18,8 +18,13 @@ variable "environment_type" {
 }
 
 variable "instance_type" {
-  default = "t2.small"
+  default = "t3.small"
 }
+
+variable "stream_logs" {
+  default = "false"
+}
+
 
 # variable "load_balancer_type" {
 #   default = "classic"
@@ -100,6 +105,24 @@ resource "aws_elastic_beanstalk_environment" "env" {
     namespace = "aws:elasticbeanstalk:application:environment"
     name      = "DATABASE_URL"
     value     = "${var.rds_connection_url}"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "StreamLogs"
+    value     = "${var.stream_logs}"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "DeleteOnTerminate"
+    value     = "false"
+  }
+
+  setting {
+    namespace = "aws:elasticbeanstalk:cloudwatch:logs"
+    name      = "RetentionInDays"
+    value     = "30"
   }
 }
 

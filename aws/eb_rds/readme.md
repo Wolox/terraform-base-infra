@@ -28,7 +28,7 @@ module "env" {
   rds_username        = "joseperezuser"     # Mandatory
   rds_password        = "unPassword!1234"   # Mandatory
   rds_engine          = "postgres"          # Optional
-  rds_engine_version  = "11.4"             # Optional
+  rds_engine_version  = "11.4"              # Optional
   rds_port            = "5432"              # Optional
   rds_multi_az        = false               # Optional
   rds_instance_type   = "db.t2.micro"       # Optional
@@ -39,6 +39,7 @@ module "env" {
   eb_environment_type    = "SingleInstance" # Optional
   eb_instance_type       = "t2.small"       # Optional
   eb_solution_stack_name = "64bit Amazon Linux 2018.03 v2.10.0 running Docker 17.12.1-ce" # Optional
+  eb_stream_logs         = "true"           # Optional
 }
 ```
 
