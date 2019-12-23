@@ -57,6 +57,7 @@ module "development" {
   eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exist in the account
   eb_environment_type    = "SingleInstance" # Optional
   eb_instance_type       = "t3.small"       # Optional
+  eb_stream_logs         = "false"          # Optional
   eb_solution_stack_name = "${data.aws_elastic_beanstalk_solution_stack.docker_latest.name}" # Optional
 }
 ```
@@ -99,7 +100,7 @@ module "development" {
   rds_username        = "joseperezuser"     # Mandatory
   rds_password        = "unPassword!1234"   # Mandatory
   rds_engine          = "postgres"          # Optional
-  rds_engine_version  = "11.4"             # Optional
+  rds_engine_version  = "11.4"              # Optional
   rds_port            = "5432"              # Optional
   rds_multi_az        = false               # Optional
   rds_instance_type   = "db.t2.micro"       # Optional
@@ -109,6 +110,7 @@ module "development" {
   eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exist in the account
   eb_environment_type    = "SingleInstance" # Optional
   eb_instance_type       = "t3.small"       # Optional
+  eb_stream_logs         = "false"          # Optional
   eb_solution_stack_name = "${data.aws_elastic_beanstalk_solution_stack.docker_latest.name}" # Optional
 }
 
@@ -130,10 +132,11 @@ module "production" {
   rds_instance_type   = "db.t2.micro"       # Optional
 
   eb_application         = "test-app"       # Mandatory
-  eb_environment         = "production"    # Mandatory
+  eb_environment         = "production"     # Mandatory
   eb_ec2_key_name        = "TestTerraform"  # Mandatory. Must exist in the account
-  eb_environment_type    = "LoadBalanced" # Optional
+  eb_environment_type    = "LoadBalanced"   # Optional
   eb_instance_type       = "t3.small"       # Optional
+  eb_stream_logs         = "true"           # Optional
   eb_solution_stack_name = "${data.aws_elastic_beanstalk_solution_stack.docker_latest.name}" # Optional
 }
 ```

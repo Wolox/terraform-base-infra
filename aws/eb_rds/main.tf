@@ -24,6 +24,7 @@ module "server" {
   environment_type    = "${var.eb_environment_type}"
   # load_balancer_type  = "${var.eb_load_balancer_type}"
   instance_type       = "${var.eb_instance_type}"
+  stream_logs         = "${var.eb_stream_logs}"
 }
 
 # Create the database

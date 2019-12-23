@@ -35,6 +35,7 @@ module "env" {
   eb_ec2_key_name        = "somecustomkey"  # Mandatory. Must exist in the account
   eb_environment_type    = "SingleInstance" # Optional
   eb_instance_type       = "t2.micro"       # Optional
+  eb_stream_logs         = "true"           # Optional
   eb_solution_stack_name = "64bit Amazon Linux 2018.03 v2.12.17 running Docker 18.06.1-ce" # Optional
 }
 
