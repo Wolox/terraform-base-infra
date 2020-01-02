@@ -2,16 +2,23 @@
 
 This repository contains the building blocks for basic infrastructure.
 
-It inclues:
+It includes:
 
-- ElasticBeanstaslk + RDS
-- S3 Website
+- AWS:
+   - ElasticBeanstaslk + RDS
+   - S3 Website
+- GCP:
+   - [Cloud Compute](gcp/README.md)
+   - [App Engine + RDS](gcp/README.md)
+   - [Cloud Run](gcp/README.md)
 
-## ElasticBeanstalk + RDS
+## AWS
+
+### ElasticBeanstalk + RDS
 
 For a list of available soultion stack names please visit [this page](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/concepts.platforms.html)
 
-### Usage example
+#### Usage example
 
 ```hcl
 provider "aws" {
@@ -63,7 +70,7 @@ module "development" {
 ```
 If you ever need to add a new environment, `production` for example, just add a new module:
 
-## Usage example
+### Usage example
 
 ```hcl
 provider "aws" {
@@ -141,9 +148,9 @@ module "production" {
 }
 ```
 
-## S3 Website
+### S3 Website
 
-### Usage example
+#### Usage example
 
 ```hcl
 provider "aws" {
@@ -164,3 +171,5 @@ module "bucket" {
   bucket_custom_domain = ""            # Optional. For example 'mywebsite.wolox.com.ar'
 }
 ```
+
+
