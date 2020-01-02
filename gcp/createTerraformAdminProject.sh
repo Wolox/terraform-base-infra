@@ -1,9 +1,16 @@
 # Source: https://cloud.google.com/community/tutorials/managing-gcp-projects-with-terraform
 
-# YOUR_ORG_ID #$ gcloud organizations list
-export TF_VAR_org_id="YOUR_ORG_ID"
-# YOUR_BILLING_ACCOUNT_ID #$ gcloud beta billing accounts list
-export TF_VAR_billing_account="YOUR_BILLING_ACCOUNT_ID"
+if [ "$1" == "" ]; then
+    echo "Organization id is missing. Run '$ gcloud organizations list' to list all available organizations."
+    exit 1
+fi
+if [ "$2" == "" ]; then
+    echo "Billing account id is missing. Run '$ gcloud beta billing accounts list' to list all available billing accounts."
+    exit 1
+fi
+
+export TF_VAR_org_id="$1"
+export TF_VAR_billing_account="$2"
 export TF_ADMIN="terraform-admin-${TF_VAR_org_id}"
 export TF_CREDS=~/.config/gcloud/${TF_ADMIN}.json
 

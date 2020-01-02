@@ -2,7 +2,7 @@
 
 ## Setup
 
-A terraform admin project must be created to handle all project creation and deployments. Setup `createTerraformAdminProject.sh` variables and run it to create it. Remember that you need `gcloud` installed and setup too.
+A terraform admin project must be created to handle all project creation and deployments. Setup `createTerraformAdminProject.sh` variables and run it to create it. Remember that you need [`gcloud` installed and set up too.](https://cloud.google.com/sdk/docs/downloads-interactive)
 
 Every environment requires a diferent project to be created. Billing account and organization id is also required to be set to deploy the resources.
 
