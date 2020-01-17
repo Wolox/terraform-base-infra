@@ -12,6 +12,7 @@ module "appengine" {
   source = "../appengine"
 
   project_id = "${module.project.project_id}"
+  region     = "${var.region}"
 }
 module "cache" {
   source = "../redis"
@@ -19,6 +20,16 @@ module "cache" {
   project_id     = "${module.project.project_id}"
   memory_size_gb = "${var.rds_memory_size_gb}"
   tier           = "${var.rds_tier}"
-  location_id    = "${var.rds_location_id}"
+  zone           = "${var.rds_zone}"
+  region         = "${var.region}"
 }
 
+module "sql" {
+  source           = "../sql"
+  project_id       = "${module.project.project_id}"
+  region           = "${var.region}"
+  zone             = "${var.zone}"
+  db_username      = "${var.db_username}"
+  db_password      = "${var.db_password}"
+  db_database_name = "${var.db_database_name}"
+}

@@ -10,6 +10,9 @@ variable tier { # Optional
   default = "BASIC"
 }
 
-variable location_id { # Optional: https://cloud.google.com/appengine/docs/locations
-  default = "us-central1-a"
+variable zone { # Optional: https://cloud.google.com/memorystore/docs/redis/regions
+  default = "us-east1-b"
+}
+variable region { # Optional: hhttps://cloud.google.com/memorystore/docs/redis/regions
+  default = "us-east1"
 }

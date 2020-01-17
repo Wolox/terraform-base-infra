@@ -20,6 +20,20 @@ variable rds_tier {
   default = "BASIC"
 }
 
-variable rds_location_id { # https://cloud.google.com/appengine/docs/locations
-  default = "us-central1-a"
+variable zone { # https://cloud.google.com/appengine/docs/locations
+  default = "us-east1-a"
 }
+
+variable rds_zone { # https://cloud.google.com/memorystore/docs/redis/regions
+  default = "us-east1-b"
+}
+
+variable region { # https://cloud.google.com/appengine/docs/locations
+  default = "us-east1"
+}
+
+variable db_username {} # Required
+
+variable db_password {} # Required
+
+variable db_database_name {} # Required

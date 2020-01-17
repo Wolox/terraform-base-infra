@@ -1,4 +1,7 @@
 variable project_id {} # Required
+variable region {      # https://cloud.google.com/appengine/docs/locations
+  default = "us-east1"
+}
 
 resource "google_project_service" "project" {
   project = "${var.project_id}"
@@ -9,7 +12,7 @@ resource "google_project_service" "project" {
 
 resource "google_cloud_run_service" "default" {
   name     = "tftest-cloudrun"
-  location = "us-central1"
+  location = "${var.region}"
   provider = "google-beta"
   project  = "${var.project_id}"
 

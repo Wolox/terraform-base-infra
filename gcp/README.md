@@ -8,6 +8,10 @@ Every environment requires a diferent project to be created. Billing account and
 
 ![](diagram.png)
 
+## Redis Deploy FAQ
+
+More info [here](RAILS_DEPLOY_FAQ.md).
+
 ## Usage example
 
 ### Compute engine intance
@@ -15,7 +19,7 @@ Every environment requires a diferent project to be created. Billing account and
 provider "google" {
   credentials = "${file("service-account.json")}"
   project     = "terraform-admin-project-name"
-  region      = "us-west1"
+  region      = "us-east1"
 }
 
 module "development" {
@@ -34,21 +38,46 @@ module "dev_compute" {
 }
 ```
 
-### App Engine + Redis
+### App Engine + Redis + Postgres
 
-Creates a project, a redis instance, and enables app engine.
+Creates a project, a redis instance, a postgres instance (with a user/password and database), enables app engine, and a Serverless VPC connection to connect app engine with cloud sql via private ip.
 
 ```hcl
+variable "billing_account" {
+  default = "12234-123445-12345"
+}
+
+variable "org_id" {
+  default = "1234565789"
+}
+
+provider "google-beta" {
+  credentials = "${file("~/.config/gcloud/terraform-admin-1234565789.json")}"
+  region      = "us-east1"
+  zone        = "us-east1-a"
+}
+
+provider "google" {
+  credentials = "${file("~/.config/gcloud/terraform-admin-1234565789.json")}"
+  region      = "us-east1"
+  zone        = "us-east1-a"
+}
+
 module "production" {
   source = "./gae_rds"
 
-  project_name    = "prod-test-project"
-  billing_account = "${var.billing_account}"
-  org_id          = "${var.org_id}"
-  project_owners  = ["user:user@wolox.com.ar"]
-  project_editors = ["user:an.editor@wolox.com.ar"]
-
-  rds_memory_size_gb = 2
+  project_name       = "test-gae-sql4"
+  billing_account    = "${var.billing_account}"
+  org_id             = "${var.org_id}"
+  project_owners     = ["user:wolox.user@wolox.com.ar"]
+  project_editors    = ["user:wolox.user@wolox.com.ar"]
+  region             = "us-east1"
+  zone               = "us-east1-a"
+  rds_zone           = "us-east1-b"
+  rds_memory_size_gb = 1
+  db_username      = "a_user"
+  db_password      = "a_password"
+  db_database_name = "a_database_name"
 }
 ```
 
