@@ -98,7 +98,7 @@ resource "aws_elastic_beanstalk_environment" "env" {
   setting {
     namespace = "aws:autoscaling:asg"
     name      = "MaxSize"
-    value     = "2"
+    value     = "${var.environment_type == "SingleInstance" ? "1" : "2"}"
   }
 
   setting {
