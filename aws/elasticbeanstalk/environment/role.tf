@@ -90,5 +90,5 @@ resource "aws_iam_role_policy_attachment" "eb_health" {
 }
 
 output "eb-ec2-role" {
-  value = "${aws_iam_role.ec2-role}"
+  value = "${aws_iam_role.ec2-role.name}"
 }
