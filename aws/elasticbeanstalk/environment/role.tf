@@ -45,7 +45,7 @@ resource "aws_iam_role_policy_attachment" "describe_environment" {
 }
 
 resource "aws_iam_policy" "describe_environment" {
-  name        = "describe-environmen-${var.application}-${var.environment}"
+  name        = "describe-environment-${var.application}-${var.environment}"
   description = "Allows EC2 instance to describe the Elastic Beanstalk environment"
 
   policy = <<EOF
