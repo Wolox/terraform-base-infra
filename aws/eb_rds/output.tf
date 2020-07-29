@@ -17,3 +17,7 @@ output "vpc_id" {
 output "servers_sg_id" {
   value = "${module.vpc.servers_sg_id}"
 }
+
+output "eb_instance_profile" {
+  value = "${module.server.eb-ec2-role}"
+}
