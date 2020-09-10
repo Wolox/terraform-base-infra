@@ -1,7 +1,7 @@
 ## Usage example
 
 ```hcl
-rovider "aws" {
+provider "aws" {
   # You can specify an access_key and a secret_key instead of an AWS profile
   # access_key = "XXXXXXXXXX"
   # secret_key = "XXXXXXXXXX"
