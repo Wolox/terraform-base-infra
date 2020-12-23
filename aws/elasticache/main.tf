@@ -1,9 +1,10 @@
 # Cache private subnets
 resource "aws_subnet" "private_cache" {
-  count             = "${length(var.azs)}"
-  vpc_id            = "${var.vpc_id}"
-  cidr_block        = "${var.cache_private_subnets[count.index]}"
-  availability_zone = "${var.azs[count.index]}"
+  count                 = "${length(var.azs)}"
+  vpc_id                = "${var.vpc_id}"
+  cidr_block            = "${var.cache_private_subnets[count.index]}"
+  cache_private_subnets = "${var.cache_private_subnets}"
+  availability_zone     = "${var.azs[count.index]}"
 
   tags {
     Name = "${var.application}-${var.environment}-private-cache-${count.index}"
