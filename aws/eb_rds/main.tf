@@ -7,6 +7,7 @@ module "vpc" {
   public_subnets      = "${var.public_subnets}"
   dbs_private_subnets = "${var.dbs_private_subnets}"
   ssh_cidr            = "${var.ssh_cidr}"
+  cidr_block          = "${var.cidr_block}"
   db_port             = "${var.rds_port}"
 }
 
