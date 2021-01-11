@@ -1,3 +1,6 @@
+# Nota de Pablo J. Villarruel @pablolibo
+Agrego fork sobre este repositorio, ya que varios branch de pj-infrastructure depende del repositorio de Wolox y ante cambios podemos perder compatibilidad 
+
 # terraform-base-infra
 
 This repository contains the building blocks for basic infrastructure.
