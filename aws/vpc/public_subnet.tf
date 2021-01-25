@@ -1,9 +1,9 @@
 resource "aws_network_acl" "public_subnet" {
   vpc_id = "${aws_vpc.main.id}"
 
-  subnet_ids = ["${aws_subnet.public.*.id}"]
+  subnet_ids = aws_subnet.public.*.id
 
-  tags {
+  tags  = {
     Name = "public-subnet"
   }
 }

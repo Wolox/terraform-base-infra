@@ -29,7 +29,7 @@ resource "aws_vpc" "main" {
   cidr_block           = "${var.cidr_block}"
   enable_dns_hostnames = "true"
 
-  tags {
+  tags = {
     Name = "${var.application}-${var.environment}"
   }
 }
@@ -72,7 +72,7 @@ resource "aws_default_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-  tags {
+  tags = {
     Name = "${var.application}-${var.environment}"
   }
 }
@@ -85,7 +85,7 @@ resource "aws_subnet" "public" {
   cidr_block        = "${var.public_subnets[count.index]}"
   availability_zone = "${var.azs[count.index]}"
 
-  tags {
+  tags = {
     Name = "${var.application}-${var.environment}-public-${count.index}"
   }
 }
@@ -96,7 +96,7 @@ resource "aws_subnet" "private_dbs" {
   cidr_block        = "${var.dbs_private_subnets[count.index]}"
   availability_zone = "${var.azs[count.index]}"
 
-  tags {
+  tags = {
     Name = "${var.application}-${var.environment}-private-dbs-${count.index}"
   }
 }
@@ -115,7 +115,7 @@ resource "aws_route_table" "r" {
     gateway_id = "${aws_internet_gateway.igw.id}"
   }
 
-  tags {
+  tags = {
     Name = "${var.application}-${var.environment} public"
   }
 }
@@ -123,7 +123,7 @@ resource "aws_route_table" "r" {
 resource "aws_default_route_table" "r" {
   default_route_table_id = "${aws_vpc.main.default_route_table_id}"
 
-  tags {
+  tags = {
     Name = "${var.application}-${var.environment} main"
   }
 }

@@ -15,7 +15,9 @@ variable "ssh_cidr" {
   default = "0.0.0.0/0"
 }
 
-variable "cidr_block" {}
+variable "cidr_block" {
+  default = "10.0.0.0/16"
+}
 
 # AWS Variables
 # TODO: We could get this from the 'current zone'
