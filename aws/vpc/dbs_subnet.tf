@@ -1,9 +1,9 @@
 resource "aws_network_acl" "private_dbs_subnet" {
   vpc_id = "${aws_vpc.main.id}"
 
-  subnet_ids = ["${aws_subnet.private_dbs.*.id}"]
+  subnet_ids = aws_subnet.private_dbs.*.id
 
-  tags {
+  tags  = {
     Name = "private-dbs-subnet"
   }
 }

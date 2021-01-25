@@ -25,5 +25,5 @@ variable "multi_az" {
 
 resource "aws_db_subnet_group" "default" {
   name       = "${var.application}-${var.environment}"
-  subnet_ids = ["${var.subnets}"]
+  subnet_ids = var.subnets
 }

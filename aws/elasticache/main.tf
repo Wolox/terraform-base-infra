@@ -6,7 +6,7 @@ resource "aws_subnet" "private_cache" {
   cache_private_subnets = "${var.cache_private_subnets}"
   availability_zone     = "${var.azs[count.index]}"
 
-  tags {
+  tags  = {
     Name = "${var.application}-${var.environment}-private-cache-${count.index}"
   }
 }
@@ -16,7 +16,7 @@ resource "aws_network_acl" "private_cache_acl" {
   vpc_id     = "${var.vpc_id}"
   subnet_ids = ["${aws_subnet.private_cache.*.id}"]
 
-  tags {
+  tags  = {
     Name = "private-cache-subnet"
   }
 }
