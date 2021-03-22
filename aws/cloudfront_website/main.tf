@@ -35,11 +35,11 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   is_ipv6_enabled     = true
   default_root_object = "${var.bucket_index_document}"
 
-  aliases = ["${var.cf_aliases}"]
+  aliases = ${var.cf_aliases}
 
   default_cache_behavior {
-    allowed_methods  = ["${var.cf_allowed_methods}"]
-    cached_methods   = ["${var.cf_cached_methods}"]
+    allowed_methods  = ${var.cf_allowed_methods}
+    cached_methods   = ${var.cf_cached_methods}
     target_origin_id = "${local.origin_id}"
 
     forwarded_values {
