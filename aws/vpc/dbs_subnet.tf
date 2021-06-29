@@ -1,6 +1,7 @@
 resource "aws_network_acl" "private_dbs_subnet" {
   vpc_id = "${aws_vpc.main.id}"
 
+   # support tf v0.11.14
   subnet_ids = ["${aws_subnet.private_dbs.*.id}"]
 
   tags  = {
