@@ -1,6 +1,7 @@
 resource "aws_network_acl" "public_subnet" {
   vpc_id = "${aws_vpc.main.id}"
 
+  # support tf v0.11.14
   subnet_ids = ["${aws_subnet.public.*.id}"]
 
   tags  = {
