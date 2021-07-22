@@ -1,6 +1,6 @@
 data "aws_acm_certificate" "c" {
   count  = "${var.bucket_custom_domain == "" ? 0 : 1}"
-  domain = "${var.cf_certificate_domain}"
+  domain = var.cf_certificate_domain
 }
 
 # Bucket variables

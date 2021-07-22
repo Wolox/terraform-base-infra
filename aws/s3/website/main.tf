@@ -1,5 +1,5 @@
 resource "aws_s3_bucket" "bucket" {
-  bucket = "${var.bucket_name}"
+  bucket = var.bucket_name
   acl    = "public-read"
 
   force_destroy = true
@@ -22,8 +22,8 @@ resource "aws_s3_bucket" "bucket" {
 EOF
 
   website {
-    index_document = "${var.index_document}"
-    error_document = "${var.error_document}"
+    index_document = var.index_document
+    error_document = var.error_document
   }
 
   cors_rule {

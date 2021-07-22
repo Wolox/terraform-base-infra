@@ -1,2 +1,4 @@
 .DS_Store
 gcp/main.tf
+.terraform/
+.terraform.lock.hcl

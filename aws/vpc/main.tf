@@ -2,15 +2,15 @@ variable "application" {}
 variable "environment" {}
 
 variable "azs" {
-  type = "list"
+  type = list(string)
 }
 
 variable "public_subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "dbs_private_subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "cidr_block" {
@@ -26,7 +26,7 @@ variable "ssh_cidr" {
 }
 
 resource "aws_vpc" "main" {
-  cidr_block           = "${var.cidr_block}"
+  cidr_block           = var.cidr_block
   enable_dns_hostnames = "true"
 
   tags = {
@@ -35,7 +35,7 @@ resource "aws_vpc" "main" {
 }
 
 resource "aws_default_security_group" "sg" {
-  vpc_id = "${aws_vpc.main.id}"
+  vpc_id = aws_vpc.main.id
 
   ingress {
     protocol  = -1
@@ -48,7 +48,7 @@ resource "aws_default_security_group" "sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["${var.ssh_cidr}"]
+    cidr_blocks = [var.ssh_cidr]
   }
 
   ingress {

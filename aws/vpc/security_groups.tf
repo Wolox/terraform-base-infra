@@ -37,8 +37,8 @@ resource "aws_security_group" "dbs" {
   vpc_id = "${aws_vpc.main.id}"
 
   ingress {
-    from_port       = "${var.db_port}"
-    to_port         = "${var.db_port}"
+    from_port       = var.db_port
+    to_port         = var.db_port
     protocol        = "tcp"
     security_groups = ["${aws_security_group.servers.id}"]
   }

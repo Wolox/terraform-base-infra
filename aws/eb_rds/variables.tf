@@ -1,12 +1,12 @@
 # VPC Variables
 variable "public_subnets" {
-  type = "list"
+  type = list(string)
 
   default = ["10.0.0.0/24", "10.0.1.0/24"]
 }
 
 variable "dbs_private_subnets" {
-  type = "list"
+  type = list(string)
 
   default = ["10.0.3.0/24", "10.0.4.0/24"]
 }
@@ -26,7 +26,7 @@ variable "aws_region" {
 }
 
 variable "aws_azs" {
-  type = "list"
+  type = list(string)
 
   default = ["us-east-1a", "us-east-1b"]
 }
@@ -43,7 +43,7 @@ variable "rds_engine" {
 }
 
 variable "rds_engine_version" {
-  default = "11.4"
+  default = "11.10"
 }
 
 variable "rds_port" {
@@ -66,7 +66,7 @@ variable "eb_environment" {}
 variable "eb_ec2_key_name" {}
 
 variable "eb_solution_stack_name" {
-  default = "64bit Amazon Linux 2018.03 v2.10.0 running Docker 17.12.1-ce"
+  default = "64bit Amazon Linux 2018.03 v2.16.8 running Docker 19.03.13-ce"
 }
 
 variable "eb_environment_type" {

@@ -6,10 +6,10 @@ locals {
 module "bucket" {
   source = "../s3/website"
 
-  bucket_name          = "${var.bucket_name}"
-  index_document       = "${var.bucket_index_document}"
-  error_document       = "${var.bucket_error_document}"
-  bucket_custom_domain = "${var.bucket_custom_domain}"
+  bucket_name          = var.bucket_name
+  index_document       = var.bucket_index_document
+  error_document       = var.bucket_error_document
+  bucket_custom_domain = var.bucket_custom_domain
 }
 
 resource "aws_cloudfront_distribution" "s3_distribution" {
@@ -31,9 +31,9 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     response_code      = 200
   }
 
-  enabled             = "${var.cf_enabled}"
+  enabled             = var.cf_enabled
   is_ipv6_enabled     = true
-  default_root_object = "${var.bucket_index_document}"
+  default_root_object = var.bucket_index_document
 
   aliases = var.cf_aliases
 
@@ -43,18 +43,18 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     target_origin_id = "${local.origin_id}"
 
     forwarded_values {
-      query_string = "${var.cf_forward_query_string}"
+      query_string = var.cf_forward_query_string
 
       cookies {
-        forward = "${var.cf_forward_cookies}"
+        forward = var.cf_forward_cookies
       }
     }
 
-    viewer_protocol_policy = "${var.cf_viewer_protocol_policy}"
-    min_ttl                = "${var.cf_min_ttl}"
-    default_ttl            = "${var.cf_default_ttl}"
-    max_ttl                = "${var.cf_max_ttl}"
-    compress               = "${var.cf_compress}"
+    viewer_protocol_policy = var.cf_viewer_protocol_policy
+    min_ttl                = var.cf_min_ttl
+    default_ttl            = var.cf_default_ttl
+    max_ttl                = var.cf_max_ttl
+    compress               = var.cf_compress
   }
 
   viewer_certificate {

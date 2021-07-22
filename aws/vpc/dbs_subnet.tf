@@ -16,8 +16,8 @@ resource "aws_network_acl_rule" "private_dbs_public_subnet_ingress" {
   rule_number    = "11${count.index}"
   rule_action    = "allow"
   cidr_block     = "${aws_subnet.public.*.cidr_block[count.index]}"
-  from_port      = "${var.db_port}"
-  to_port        = "${var.db_port}"
+  from_port      = var.db_port
+  to_port        = var.db_port
 }
 
 resource "aws_network_acl_rule" "private_dbs_public_return_traffic" {

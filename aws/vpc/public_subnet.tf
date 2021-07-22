@@ -93,6 +93,6 @@ resource "aws_network_acl_rule" "public_subnet_private_dbs_egress" {
   rule_number    = "15${count.index}"
   rule_action    = "allow"
   cidr_block     = "${aws_subnet.private_dbs.*.cidr_block[count.index]}"
-  from_port      = "${var.db_port}"
-  to_port        = "${var.db_port}"
+  from_port      = var.db_port
+  to_port        = var.db_port
 }

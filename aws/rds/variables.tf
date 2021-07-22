@@ -8,11 +8,11 @@ variable "engine" {}
 variable "engine_version" {}
 
 variable "azs" {
-  type = "list"
+  type = list(string)
 }
 
 variable "subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "instance_type" {

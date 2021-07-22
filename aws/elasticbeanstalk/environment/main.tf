@@ -6,7 +6,7 @@ variable "security_group" {}
 variable "rds_connection_url" {}
 
 variable "subnets" {
-  type = "list"
+  type = list(string)
 }
 
 variable "solution_stack_name" {
